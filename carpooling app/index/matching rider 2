@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matching Ride Givers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #007bff;
+      padding: 10px 20px;
+      color: #fff;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 16px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .ride-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .ride-card img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .ride-info {
+      flex-grow: 1;
+    }
+
+    .ride-info p {
+      margin: 5px 0;
+    }
+
+    .contact-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .modal-content p span {
+      font-weight: bold;
+    }
+
+    .close-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .close-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Matching Ride Givers</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Profile</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Ride card 1 -->
+    <div class="ride-card">
+      <img src="https://via.placeholder.com/50" alt="Profile">
+      <div class="ride-info">
+        <p><strong>XYZ</strong></p>
+        <p>From <strong>Via</strong> To</p>
+        <p><strong>9:30 AM</strong></p>
+      </div>
+      <button class="contact-button" onclick="showModal('XYZ', '99XX67XX25', 'XYZ Apartments', 'Bagmane Tech Park', 'Route')">Contact</button>
+    </div>
+
+    <!-- Ride card 2 -->
+    <div class="ride-card">
+      <img src="https://via.placeholder.com/50" alt="Profile">
+      <div class="ride-info">
+        <p><strong>ABC</strong></p>
+        <p>From <strong>Via</strong> To</p>
+        <p><strong>10:30 AM</strong></p>
+      </div>
+      <button class="contact-button" onclick="showModal('ABC', '88XX44XX11', 'ABC Apartments', 'MG Road', 'Main Street')">Contact</button>
+    </div>
+
+    <!-- Ride card 3 -->
+    <div class="ride-card">
+      <img src="https://via.placeholder.com/50" alt="Profile">
+      <div class="ride-info">
+        <p><strong>DEF</strong></p>
+        <p>From <strong>Via</strong> To</p>
+        <p><strong>9:45 AM</strong></p>
+      </div>
+      <button class="contact-button" onclick="showModal('DEF', '77XX55XX33', 'DEF Apartments', 'Electronic City', 'Outer Ring Road')">Contact</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="rider-modal">
+    <div class="modal-content">
+      <h2>Rider Information</h2>
+      <p><span>Rider:</span> <span id="rider-name"></span></p>
+      <p><span>Mobile:</span> <span id="rider-mobile"></span></p>
+      <p><span>From:</span> <span id="rider-from"></span></p>
+      <p><span>To:</span> <span id="rider-to"></span></p>
+      <p><span>Via:</span> <span id="rider-via"></span></p>
+      <button class="close-button" onclick="closeModal()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    function showModal(name, mobile, from, to, via) {
+      document.getElementById('rider-name').textContent = name;
+      document.getElementById('rider-mobile').textContent = mobile;
+      document.getElementById('rider-from').textContent = from;
+      document.getElementById('rider-to').textContent = to;
+      document.getElementById('rider-via').textContent = via;
+      document.getElementById('rider-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('rider-modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
